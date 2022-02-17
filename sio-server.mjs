@@ -5,7 +5,6 @@ console.log('server listening on port 3000');
 
 io.on("connection", (socket) => {
   socket.on('data', (data) => {
-    console.log(data);
-    // ...
+    socket.broadcast.emit('lidar-data', data);
   });
 });
