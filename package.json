@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@logdna/tail-file": "^2.1.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "tail": "^2.2.4"
+  }
+}
