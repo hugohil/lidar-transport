@@ -64,7 +64,7 @@ with fifo-lidar running, in another terminal window, run the client script
 ```bash
 $ cd fifo-pidar/
 $ npm i
-$ node client.mjs --address="192.168.1.x" --port=3000
+$ node client.mjs --address="127.0.0.1" --port=3000 --fifofile="/tmp/pidar" # these are the default values
 ```
 
 in the target computer, clone the [fifo-pidar](https://github.com/hugohil/fifo-pidar) repo as well and run the `sio-server.mjs` script.
