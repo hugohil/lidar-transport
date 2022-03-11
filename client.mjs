@@ -38,11 +38,12 @@ tail.on('line', (data) => {
       const a = Number(d2r(angle));
       const d = Number(distances[i] ?? 0);
       const { x, y } = p2c(d, a);
+
       return {
         x: Number(x.toFixed(2)),
-  y: Number(y.toFixed(2)),
-  a: Number(a.toFixed(2)),
-  d: Number(d.toFixed(2))
+        y: Number(y.toFixed(2)),
+        // a: Number(a.toFixed(2)),
+        // d: Number(d.toFixed(2))
       }
     }) ?? [];
 
