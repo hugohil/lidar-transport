@@ -20,6 +20,10 @@ function p2c (r, theta) {
   }
 };
 
+function d2r (deg) {
+  return deg * (Math.PI / 180);
+}
+
 const tail = new Tail(fifofile);
 tail.on('line', (data) => {
   const res = data.match(re);
@@ -30,7 +34,8 @@ tail.on('line', (data) => {
     const angles = datas?.filter((d, i) => (i % 2 === 0));
     const distances = datas?.filter((d, i) => (i % 2 === 1));
     const lidar = angles?.map((angle, i) => {
-      const a = Number(angle);
+
+      const a = Number(d2r(angle));
       const d = Number(distances[i] ?? 0);
       const { x, y } = p2c(d, a);
       return {
