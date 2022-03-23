@@ -1,4 +1,4 @@
-import Tail from 'tail-file';
+import { Tail } from 'tail';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { io } from "socket.io-client";
@@ -27,7 +27,7 @@ function d2r (deg) {
 const tail = new Tail(fifofile);
 
 tail.on('error', err => { throw(err) });
-tail.on('line', data => {
+tail.on('line', (data) => {
   const res = data.match(re);
 
   if (res) {
@@ -50,9 +50,3 @@ tail.on('line', data => {
     socket.emit('data', lidar);
   }
 });
-tail.on('ready', fd => console.log('ready') );
-tail.on('skip', pos => console.log('skipping') );
-tail.on('secondary', filename => console.log(`file is missing. Tailing ${filename} instead.`) );
-tail.on('restart', console.log);
-
-tail.start();
