@@ -1,4 +1,4 @@
-# PiDAR installation
+# fifo-lidar-transport installation
 
 ## toolbox
 
@@ -56,15 +56,15 @@ in the **raspberry**:
 
 ```bash
 $ cd ~/sources
-$ git clone git@github.com:hugohil/fifo-pidar.git
+$ git clone git@github.com:hugohil/fifo-lidar-transport.git
 ```
 
 with fifo-lidar running, in another terminal window, run the client script
 
 ```bash
-$ cd fifo-pidar/
+$ cd fifo-lidar-transport/
 $ npm i
 $ node client.mjs --address="127.0.0.1" --port=3000 --fifofile="/tmp/pidar" # these are the default values
 ```
 
-in the target computer, clone the [fifo-pidar](https://github.com/hugohil/fifo-pidar) repo as well and run the `sio-server.mjs` script.
+in the target computer, clone the [fifo-lidar-transport](https://github.com/hugohil/fifo-lidar-transport) repo as well and run the `sio-server.mjs` script.
