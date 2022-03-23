@@ -3,6 +3,7 @@
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",
     "tail": "^2.2.4",
+    "tail-file": "^1.4.15",
     "yargs": "^17.3.1"
   }
 }
