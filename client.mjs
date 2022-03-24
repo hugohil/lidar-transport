@@ -43,6 +43,8 @@ tail.on('line', (data) => {
       const { x, y } = p2c(d, a);
 
       return {
+        a,
+        d,
         x: Number(x.toFixed(2)),
         y: Number(y.toFixed(2))
       }
