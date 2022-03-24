@@ -7,8 +7,9 @@ const argv = yargs(hideBin(process.argv)).argv;
 const addr = argv.address || '127.0.0.1';
 const port = argv.port || 3000;
 const fifofile = argv.fifofile || '/tmp/pidar';
+const name = argv.name || 'fifo-lidar';
 
-const socket = io(`ws://${addr}:${port}`);
+const socket = io(`ws://${addr}:${port}`, { query: { name } });
 
 const re = /S;(.+)E;/gmi;
 
