@@ -1,4 +1,7 @@
-import { Tail } from 'tail';
+#!/usr/bin/env node
+
+import process from 'process';
+
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { io } from "socket.io-client";
@@ -6,8 +9,7 @@ import { io } from "socket.io-client";
 const argv = yargs(hideBin(process.argv)).argv;
 const addr = argv.address || '127.0.0.1';
 const port = argv.port || 3000;
-const fifofile = argv.fifofile || '/tmp/pidar';
-const name = argv.name || 'fifo-lidar';
+const name = argv.name || 'lidar-transport';
 
 const socket = io(`ws://${addr}:${port}`, { query: { name } });
 
@@ -25,11 +27,10 @@ function d2r (deg) {
   return deg * (Math.PI / 180);
 }
 
-const tail = new Tail(fifofile);
+process.stdin.resume();
 
-tail.on('error', err => { throw(err) });
-tail.on('line', (data) => {
-  const res = data.match(re);
+process.stdin.on('data', (data) => {
+  const res = data.toString('utf-8').match(re);
 
   if (res) {
     const datas = res[0].match(/\-?\d+\.\d+/gmi);
