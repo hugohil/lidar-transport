@@ -10,6 +10,7 @@ const argv = yargs(hideBin(process.argv)).argv;
 const addr = argv.address || '127.0.0.1';
 const port = argv.port || 3000;
 const name = argv.name || 'lidar-transport';
+const fps = argv.fps || 30;
 
 const socket = io(`ws://${addr}:${port}`, { query: { name } });
 
@@ -27,13 +28,20 @@ function d2r (deg) {
   return deg * (Math.PI / 180);
 }
 
-process.stdin.resume();
+let fulldatas = null;
+let rawdatas = '';
 
-process.stdin.on('data', (data) => {
-  const res = data.toString('utf-8').match(re);
+process.stdin.setEncoding('utf-8');
+process.stdin.on('data', (chunk) => {
+  rawdatas += chunk;
 
-  if (res) {
-    const datas = res[0].match(/\-?\d+\.\d+/gmi);
+  fulldatas = rawdatas?.match(re);
+});
+
+function transmit () {
+  if (fulldatas?.length) {
+    rawdatas = '';
+    const datas = fulldatas[0].match(/\-?\d+\.\d+/gmi);
 
     const angles = datas?.filter((d, i) => (i % 2 === 0));
     const distances = datas?.filter((d, i) => (i % 2 === 1));
@@ -53,4 +61,6 @@ process.stdin.on('data', (data) => {
 
     socket.emit('data', lidar);
   }
-});
+}
+
+setInterval(transmit, (1000 / fps));
