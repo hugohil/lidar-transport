@@ -2,6 +2,8 @@
 
 A project for connecting RP LiDAR devices from a raspberry pi to any other device over socket.io.
 
+Works well with [vizdar](https://github.com/hugohil/vizdar);
+
 # usage
 
 ```bash
