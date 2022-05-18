@@ -1,0 +1,17 @@
+[Unit]
+Description=Start Lidar transport
+Documentation=https://github.com/hugohil/lidar-transport
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+User=player
+ExecStartPre=/bin/sleep 3
+WorkingDirectory=/home/player/sources/lidar-transport
+ExecStart=/bin/sh -c '/home/player/sources/lidar-transport/bin/linux/print-lidar --port '/dev/ttyUSB0' | /home/player/.nvm/versions/node/v16.14.2/bin/node /home/player/sources/lidar-transport/main.mjs --address="172.24.10.51" --name=$(hostname)'
+RestartSec=2
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
